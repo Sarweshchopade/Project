@@ -312,6 +312,7 @@ class _HomePageState extends State<HomePage> {
   void _showSignupDialog(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController NameController = TextEditingController();
     String selectedRole = 'buyer';
 
     showDialog(
@@ -374,6 +375,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(height: 12),
                       TextField(
+                        controller: NameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Name',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      TextField(
                         controller: emailController,
                         decoration: const InputDecoration(
                           labelText: 'Email',
@@ -405,8 +414,9 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               final email = emailController.text.trim();
                               final password = passwordController.text.trim();
+                              final name = NameController.text.trim();
 
-                              if (email.isEmpty || password.isEmpty) {
+                              if (email.isEmpty || password.isEmpty||name.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('Please fill all fields'),
